@@ -1,0 +1,25 @@
+<div class="container wrapper" >
+  <div [hidden]="submitted" >
+    <h3>Consulta de pico y placa</h3>
+    <form [formGroup]="consultaForm"  (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="placa">Ingrese placa a consultar:
+          <input type="text" class="form-control" placeholder="ABC-0000"   formControlName="placa" >
+        </label>
+        </div>
+        <div class="form-group">
+          <label for="fecha">Seleccione la fecha:
+            
+            <input type="text" class="form-control" ngbDatepicker  placeholder="DD/MM/AAAA"  formControlName="fecha" >
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="hora">Seleccione la hora:
+            <input type="text" class="form-control" placeholder="HH:mm"  formControlName="hora">
+          </label>
+        </div>
+        
+      <button type="submit" class="btn btn-success" [disabled]="!consultaForm.valid">Submit</button>
+    </form>
+  </div>
+  
