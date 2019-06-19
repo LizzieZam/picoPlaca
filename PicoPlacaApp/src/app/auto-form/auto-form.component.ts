@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { AutoServiceService } from '../auto-service.service';
 @Component({
   selector: 'app-auto-form',
   templateUrl: './auto-form.component.html',
@@ -15,7 +16,7 @@ export class AutoFormComponent implements OnInit {
  
   
   
-  constructor(private fb: FormBuilder ) { 
+  constructor(private fb: FormBuilder, private autoService: AutoServiceService ) { 
     
   }
 
@@ -48,14 +49,13 @@ export class AutoFormComponent implements OnInit {
   submitted = false;
  
   onSubmit() {this.submitted = true;
+    this.autoService.save(this.autoForm.value);
     alert("La informacion ingresada fue :\nPlaca:"+
       this.autoForm.value.placa+"\nColor:"+
       this.autoForm.value.color+"\nModelo:"+
       this.autoForm.value.modelo+"\nChasis:"+
       this.autoForm.value.chasis+"\nMarca:"+
       this.autoForm.value.marca );
-      localStorage.setItem("autos", JSON.stringify(this.autoForm.value));
-
     console.log(JSON.stringify(this.autoForm.value));
   }
 }

@@ -7,7 +7,9 @@ import { AutoFormComponent } from './auto-form/auto-form.component';
 import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
 import { MenuComponent } from './menu/menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,8 +19,12 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

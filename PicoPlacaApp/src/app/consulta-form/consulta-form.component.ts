@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
+import { AutoServiceService } from '../auto-service.service';
+
 
 @Component({
   selector: 'app-consulta-form',
@@ -11,10 +13,16 @@ export class ConsultaFormComponent implements OnInit {
   placa:AbstractControl;
   fecha: AbstractControl;
   hora:AbstractControl;
+  minDate: Date;
+  
+
+   
+
+  
+  constructor(private fb: FormBuilder,private autoService: AutoServiceService) { 
   
   
-  
-  constructor(private fb: FormBuilder ) { 
+    this.minDate=new Date();
     
   }
 
@@ -28,22 +36,25 @@ export class ConsultaFormComponent implements OnInit {
   
       ])),
       fecha: new FormControl('', Validators.required),
-      hora: new FormControl('',Validators.required),
+      hora: new FormControl('', Validators.required),
+   
       
     });
     this.placa  = this.consultaForm.controls['placa'];
     this.fecha  = this.consultaForm.controls['fecha'];
-    this.hora = this.consultaForm.controls['hora'];
+    this.hora  = this.consultaForm.controls['hora'];
   
   }
   submitted = false;
  
   onSubmit() {this.submitted = true;
-    alert("La informacion ingresada fue :\nPlaca:"+
-      this.consultaForm.value.placa+"\nFecha:"+
-      this.consultaForm.value.fecha+"\nHora:"+
-      this.consultaForm.value.hora
-     );
-    console.log(JSON.stringify(this.consultaForm.value));
+    var fechaConsulta=this.consultaForm.value.fecha.year+"-"
+    +((this.consultaForm.value.fecha.month<10)?"0"+this.consultaForm.value.fecha.month:this.consultaForm.value.fecha.month)+
+    "-"+this.consultaForm.value.fecha.day;
+    var respuesta=this.autoService.search(this.consultaForm.value.placa,
+    this.consultaForm.value.fech,
+    this.consultaForm.value.hora);
+    alert(respuesta );
+     
   }
 }
