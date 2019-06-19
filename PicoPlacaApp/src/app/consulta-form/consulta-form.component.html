@@ -8,29 +8,29 @@
         </label>
         </div>
         <div class="form-group">
-                <label for="fecha">Seleccione la fecha :
+                <label for="fecha">Seleccione la fecha y hora :
                 <div class="input-group">
                     <input class="form-control" formControlName="fecha" 
                      [min]="minDate"
+                     
                      [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                    <owl-date-time [pickerType]="'calendar'" [startAt]="minDate" #dt1></owl-date-time>
+                    <owl-date-time [startAt]="minDate" #dt1 ></owl-date-time>
                 </div>
           </label>
       
         </div>
-        <div class="form-group">
-                <label for="hora">Seleccione la  hora:
-                <div class="input-group">
-                    <input class="form-control" formControlName="hora" 
-                     [min]="minDate"
-                     [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
-                    <owl-date-time  [pickerType]="'timer'" [startAt]="minDate" #dt2></owl-date-time>
-                </div>
-          </label>
-      
-        </div>
-             
+       
       <button type="submit" class="btn btn-success" [disabled]="!consultaForm.valid">Submit</button>
     </form>
+  </div>
+  <div [hidden]="!submitted"   >
+     
+      <div class="row">
+         <h2>Atencion</h2>
+        <div >{{respuesta}}</div>
+      </div>
+      <br>
+      <button class="btn btn-primary" (click)="submitted=false">OK</button>
+    </div>
   </div>
   

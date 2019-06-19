@@ -12,7 +12,6 @@ export class ConsultaFormComponent implements OnInit {
   consultaForm:FormGroup;
   placa:AbstractControl;
   fecha: AbstractControl;
-  hora:AbstractControl;
   minDate: Date;
   
 
@@ -36,25 +35,32 @@ export class ConsultaFormComponent implements OnInit {
   
       ])),
       fecha: new FormControl('', Validators.required),
-      hora: new FormControl('', Validators.required),
+   
    
       
     });
     this.placa  = this.consultaForm.controls['placa'];
     this.fecha  = this.consultaForm.controls['fecha'];
-    this.hora  = this.consultaForm.controls['hora'];
+  
   
   }
   submitted = false;
- 
+  respuesta:string;
   onSubmit() {this.submitted = true;
-    var fechaConsulta=this.consultaForm.value.fecha.year+"-"
-    +((this.consultaForm.value.fecha.month<10)?"0"+this.consultaForm.value.fecha.month:this.consultaForm.value.fecha.month)+
-    "-"+this.consultaForm.value.fecha.day;
-    var respuesta=this.autoService.search(this.consultaForm.value.placa,
-    this.consultaForm.value.fech,
-    this.consultaForm.value.hora);
-    alert(respuesta );
-     
+    
+    this.autoService.search(this.consultaForm.value.placa,
+      this.consultaForm.value.fecha,
+    this.consultaForm.value.fecha).subscribe(
+      (data) => { // Success
+        this.respuesta = data;
+        console.log(this.respuesta );
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    
+   
+   
   }
 }
